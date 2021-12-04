@@ -1,0 +1,121 @@
+<head>
+	<style>
+		body {
+			font-family: 'Lato';
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			background-color: #222;
+			color: white;
+		}
+
+		main {
+			height: 100vh;
+		}
+
+		a {
+			text-decoration: none;
+			color: var(--green);
+		}
+
+		:root {
+			--green: #1dc906;
+		}
+
+		/* Blocks */
+		.login {
+			width: 100%;
+			max-width: 400px;
+		}
+
+		.login__title {
+			font-weight: 400;
+			font-size: 2.2rem;
+			letter-spacing: 0.0rem;
+		}
+
+		.login__label {
+			font-size: .95rem;
+			color: #a1a1a1;
+			display: block;
+			margin: 1rem 0 .5rem;
+		}
+
+		.login__field {
+			width: 100%;
+			max-width: 400px;
+			font-size: 1rem;
+			font-family: 'Roboto Slab';
+			letter-spacing: 0.02rem;
+			color: #c7c7c7;
+			background: #1a1a1a;
+			border: 1px solid transparent;
+			padding: .8rem 1rem;
+			outline: none;
+		}
+
+		.login__field:focus,
+		.login__field:hover {
+			border-bottom: 1px solid var(--green);
+		}
+
+		.btn,
+		.btn--dark {
+			outline: none;
+			text-transform: uppercase;
+			padding: .8rem 1.2rem;
+			font-size: .8rem;
+			font-weight: 600;
+			letter-spacing: 0.03rem;
+			border-radius: 6px;
+			transition: .25s;
+		}
+
+		.btn--dark {
+			color: var(--green);
+			border: 1px solid var(--green);
+			background: rgba(0, 0, 0, 0.3);
+		}
+
+		.btn--dark:hover {
+			cursor: pointer;
+			background: var(--green);
+			color: #333;
+		}
+
+		/* Wrappers */
+		.wrapper--center {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.text-danger{
+			color: rgb(122, 47, 47);
+			padding: 5px;
+			font-size: 15px;
+		}
+
+	</style>
+</head>
+
+<main class="wrapper--center">
+	<form id="form" action="/user/login" method="POST">
+		<h1 class="login__title">Login</h1>
+
+		<label class="login__label">Email</label>
+		<input class="login__field" type="text" required name="Email"/>
+
+		<label class="login__label">Password</label>
+		<input class="login__field" type="password" required name="Password"/>
+		
+		<% if (locals.errors && errors.Email) {%>
+			<div class="text-danger">
+				<%= errors.Email.msg %>
+			</div>
+		<%} %><br><br>
+
+		<p>Don't have an account <a href="/user/register">Sign Up?</a></p>
+		<button class="btn--dark">login</button>
+	</form>
+</main>

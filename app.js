@@ -5,7 +5,7 @@ const session = require('express-session');
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('./public'));
-app.listen(3000, () => console.log('Servidor levantado en el puerto 3000'));
+app.listen(3000, () => console.log('Server running at port 3000'));
 
 // Template Engine
 app.set('view engine', 'ejs');
@@ -16,7 +16,7 @@ const userRoutes = require('./routes/userRoutes');
 const services = require('./routes/servicesRoutes');
 
 app.use(session({
-    secret: "secreto",
+    secret: "It´s a secret",
     resave: false,
     saveUninitialized: false,
 }));

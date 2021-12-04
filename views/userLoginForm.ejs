@@ -99,6 +99,10 @@
 	</style>
 </head>
 
+<% if(locals.isLogged){ %>
+	<script>  document.location.href = '/profile' </script>
+<% } else { %>
+
 <main class="wrapper--center">
 	<form id="form" action="/user/login" method="POST">
 		<h1 class="login__title">Login</h1>
@@ -108,7 +112,7 @@
 
 		<label class="login__label">Password</label>
 		<input class="login__field" type="password" required name="Password"/>
-		
+
 		<% if (locals.errors && errors.Email) {%>
 			<div class="text-danger">
 				<%= errors.Email.msg %>
@@ -119,3 +123,5 @@
 		<button class="btn--dark">login</button>
 	</form>
 </main>
+
+<% } %>

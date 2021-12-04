@@ -49,6 +49,7 @@ module.exports = {
 		return res.render('userLoginForm');
 	},
 	processLogin: async (req, res) => {
+
 		let userToLogin = null;
 
 		try{
@@ -57,46 +58,52 @@ module.exports = {
 			return res.send(error)
 		}
 		
-        
+        /*
         if (userToLogin === null) {
             console.log('Not found!');
         } else {
             console.log(userToLogin);
-        }
+        }*/
         
         if (userToLogin) {
+
 			let passwordOK = false;
-            if(req.body.password == userToLogin.password){
+            if(req.body.Password === userToLogin.Password){
 				passwordOK = true;
 			}
+
             if (passwordOK) {
-                delete userToLogin.Password;
-                req.session.userLogged = userToLogin;
-                //console.log(req.session.userLogged);
-        
-                res.cookie('email', req.body.email, { maxAge: (10000000000000 * 600) * 600 })
-				console.log(req.session.userLogged)
-                return res.redirect('/');
+				delete userToLogin.Password
+				req.session.userLogged = userToLogin
+				
+                
+				return res.render('index',{
+					User : req.session.userLogged
+				});
+
             }else{
-				return res.render('user/login', {
+				return res.render('userLoginForm', {
 					errors: {
 						Email: {
-							msg: 'El usuario o contraseña son incorrectos'
+							msg: 'Invalid Credentials'
 						}
 					}
 				});
 			}
         }
-        return res.render('user/login', {
+
+        return res.render('userLoginForm', {
             errors: {
-                email: {
-                    msg: 'Usuario no registrado'
+                Email: {
+                    msg: 'Email not registred'
                 }
             }
         });
 
 	},
-	profile: async (req, res) => {
-		
+	profile: (req, res) => {
+		return res.render('profile',{
+			User : req.session.userLogged 
+		});
 	},
 }

@@ -14,6 +14,7 @@ app.set('view engine', 'ejs');
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
 const services = require('./routes/servicesRoutes');
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
 
 app.use(session({
     secret: "It´s a secret",
@@ -21,7 +22,7 @@ app.use(session({
     saveUninitialized: false,
 }));
 
-
+app.use(userLoggedMiddleware);
 app.use('/', mainRoutes);
 app.use('/user', userRoutes);
 app.use('/youtubeTop', services)

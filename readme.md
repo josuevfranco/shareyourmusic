@@ -1,1 +1,0 @@
-# Validación de formulario de registro con Express Validator

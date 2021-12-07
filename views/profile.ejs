@@ -92,16 +92,15 @@
 <h1 class="title"> WELCOME BACK</h1>
 <h2 class="title">My profile</h2>
 <div class="user-profile">
-    <img id="avatar" src="/images/avatars/<%= User.SRC_Image %> >
-    <div id="fullname"> <%= User.Name %> </div>
+    <img id="avatar" src="/images/avatars/<%= locals.userLogged.SRC_Image%>">
+    <div id="fullname"> <%= locals.userLogged.Name %> </div>
     <div id="username">
-        <%= User.Username %>
+        <%= locals.userLogged.Username %>
     </div>
     <div class="description">
-        <div>Email: <span id="email"><%= User.Email %></span></div>
-        <div>Gender: <span id="city"><%= User.Gender %></span></div>
+        <div>Email: <span id="email"><%= locals.userLogged.Email %></span></div>
+        <div>Gender: <span id="city"><%= locals.userLogged.Gender %></span></div>
     </div>
     <div class="footer">
-        <button id="btn"><a href="/index">Home Page</a></button>
-    </div>
+        <button id="btn"><a href="/">Home Page</a></button>
 </div>

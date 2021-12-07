@@ -57,14 +57,7 @@ module.exports = {
 		} catch(error){
 			return res.send(error)
 		}
-		
-        /*
-        if (userToLogin === null) {
-            console.log('Not found!');
-        } else {
-            console.log(userToLogin);
-        }*/
-        
+		        
         if (userToLogin) {
 
 			let passwordOK = false;
@@ -77,9 +70,7 @@ module.exports = {
 				req.session.userLogged = userToLogin
 				
                 
-				return res.render('index',{
-					User : req.session.userLogged
-				});
+				return res.render('index');
 
             }else{
 				return res.render('userLoginForm', {

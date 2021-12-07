@@ -1,780 +1,317 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('partials/head'); %>
-	<style>
-		@import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet';
-		@import "font-awesome";
-
-
-
-		.button:after {
-			background: #2c3e50;
-		}
-
-
-		/*ORANGE*/
-		.b-orange,
-		.b-orange:before {
-			background: rgba(255, 193, 7, 1);
-			background: -moz-linear-gradient(45deg, rgba(255, 193, 7, 1) 0%, rgba(255, 87, 34, 1) 100%);
-			background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(255, 193, 7, 1)), color-stop(100%, rgba(255, 87, 34, 1)));
-			background: -webkit-linear-gradient(45deg, rgba(255, 193, 7, 1) 0%, rgba(255, 87, 34, 1) 100%);
-			background: -o-linear-gradient(45deg, rgba(255, 193, 7, 1) 0%, rgba(255, 87, 34, 1) 100%);
-			background: -ms-linear-gradient(45deg, rgba(255, 193, 7, 1) 0%, rgba(255, 87, 34, 1) 100%);
-			background: linear-gradient(45deg, rgba(255, 193, 7, 1) 0%, rgba(255, 87, 34, 1) 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc107', endColorstr='#ff5722', GradientType=1);
-		}
-
-		/*END GRADIENTS*/
-		/*BASE BUTTON*/
-		.button {
-			display: inline-block;
-			position: relative;
-			border-radius: 3px;
-			text-decoration: none;
-			padding: .5em;
-			margin: .5em;
-			font-size: 2em;
-			font-weight: bold;
-			transition: all .5s;
-			-webkit-text-fill-color: transparent;
-		}
-
-		.button:hover {
-			text-shadow: 0px 0px 0px rgba(255, 255, 255, .75);
-		}
-
-		.button:hover:after {
-			left: 100%;
-			top: 100%;
-			bottom: 100%;
-			right: 100%;
-		}
-
-		.button:before {
-			content: '';
-			display: block;
-			position: absolute;
-			left: 0;
-			top: 0;
-			bottom: 0;
-			right: 0;
-			z-index: -1;
-			border-radius: 5px;
-			transition: all .5s;
-		}
-
-		.button:after {
-			content: '';
-			display: block;
-			position: absolute;
-			left: 2px;
-			top: 2px;
-			bottom: 2px;
-			right: 2px;
-			z-index: -1;
-			border-radius: 5px;
-			transition: all .5s;
-		}
-
-		.button2 {
-			display: inline-block;
-			height: 40px;
-			margin: .5em;
-			padding: .5em;
-			border-radius: 5px;
-			transition: all .5s;
-			filter: hue-rotate(0deg);
-			color: #FFF;
-			text-decoration: none;
-		}
-
-		/*END BASE BUTTON*/
-		/*ROTATE*/
-		.rot-360-noscoop:hover {
-			filter: hue-rotate(360deg);
-			transform: rotate(360deg);
-		}
-
-		.rot-135:hover {
-			filter: hue-rotate(135deg);
-		}
-
-		.rot-90:hover {
-			filter: hue-rotate(90deg);
-		}
-
-		/*END ROTATE*/
-
-		:root {
-			--dk-gray-100: #F3F4F6;
-			--dk-gray-200: #E5E7EB;
-			--dk-gray-300: #D1D5DB;
-			--dk-gray-400: #9CA3AF;
-			--dk-gray-500: #6B7280;
-			--dk-gray-600: #4B5563;
-			--dk-gray-700: #374151;
-			--dk-gray-800: #1F2937;
-			--dk-gray-900: #111827;
-			--dk-dark-bg: #313348;
-			--dk-darker-bg: #2a2b3d;
-			--navbar-bg-color: #6f6486;
-			--sidebar-bg-color: #252636;
-			--sidebar-width: 250px;
-		}
-
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-
-		body {
-			font-family: 'Inter', sans-serif;
-			background-color: var(--dk-darker-bg);
-			font-size: .925rem;
-		}
-
-		#wrapper {
-			margin-left: var(--sidebar-width);
-			transition: all .3s ease-in-out;
-		}
-
-		#wrapper.fullwidth {
-			margin-left: 0;
-		}
-
-
-
-		/** --------------------------------
- -- Sidebar
--------------------------------- */
-		.sidebar {
-			background-color: var(--sidebar-bg-color);
-			width: var(--sidebar-width);
-			transition: all .3s ease-in-out;
-			transform: translateX(0);
-			z-index: 9999999
-		}
-
-		.sidebar .close-aside {
-			position: absolute;
-			top: 7px;
-			right: 7px;
-			cursor: pointer;
-			color: #EEE;
-		}
-
-		.sidebar .sidebar-header {
-			border-bottom: 1px solid #2a2b3c
-		}
-
-		.sidebar .sidebar-header h5 a {
-			color: var(--dk-gray-300)
-		}
-
-		.sidebar .sidebar-header p {
-			color: var(--dk-gray-400);
-			font-size: .825rem;
-		}
-
-		.sidebar .search .form-control~i {
-			color: rgb(158, 93, 68);
-			right: 40px;
-			top: 22px;
-		}
-
-		.sidebar>ul>li {
-			padding: .7rem 1.75rem;
-		}
-
-		.sidebar ul>li>a {
-			color: var(--dk-gray-400);
-			text-decoration: none;
-		}
-
-		/* Start numbers */
-		.sidebar ul>li>a>.num {
-			line-height: 0;
-			border-radius: 3px;
-			font-size: 14px;
-			padding: 0px 5px
-		}
-
-		.sidebar ul>li>i {
-			font-size: 18px;
-			margin-right: .7rem;
-			color: var(--dk-gray-500);
-		}
-
-		.sidebar ul>li.has-dropdown>a:after {
-			content: '\eb3a';
-			font-family: unicons-line;
-			font-size: 1rem;
-			line-height: 1.8;
-			float: right;
-			color: var(--dk-gray-500);
-			transition: all .3s ease-in-out;
-		}
-
-		.sidebar ul .opened>a:after {
-			transform: rotate(-90deg);
-		}
-
-		/* Start dropdown menu */
-		.sidebar ul .sidebar-dropdown {
-			padding-top: 10px;
-			padding-left: 30px;
-			display: none;
-		}
-
-		.sidebar ul .sidebar-dropdown.active {
-			display: block;
-		}
-
-		.sidebar ul .sidebar-dropdown>li>a {
-			font-size: .85rem;
-			padding: .5rem 0;
-			display: block;
-		}
-
-		/* End dropdown menu */
-
-		.show-sidebar {
-			transform: translateX(-270px);
-		}
-
-		@media (max-width: 767px) {
-			.sidebar ul>li {
-				padding-top: 12px;
-				padding-bottom: 12px;
-			}
-
-			.sidebar .search {
-				padding: 10px 0 10px 30px
-			}
-		}
-
-
-
-
-		/** --------------------------------
- -- welcome
--------------------------------- */
-		.welcome {
-			color: var(--dk-gray-300);
-		}
-
-		.welcome .content {
-			background-color: var(--dk-dark-bg);
-		}
-
-		.welcome p {
-			color: var(--dk-gray-400);
-		}
-
-
-
-
-		/** --------------------------------
- -- Statistics
--------------------------------- */
-		.statistics {
-			color: var(--dk-gray-200);
-		}
-
-		.statistics .box {
-			background-color: var(--dk-dark-bg);
-		}
-
-		.statistics .box i {
-			width: 60px;
-			height: 60px;
-			line-height: 60px;
-		}
-
-		.statistics .box p {
-			color: var(--dk-gray-400);
-		}
-
-
-
-
-		/** --------------------------------
- -- Charts
--------------------------------- */
-		.charts .chart-container {
-			background-color: var(--dk-dark-bg);
-		}
-
-		.charts .chart-container h3 {
-			color: var(--dk-gray-400)
-		}
-
-
-
-
-		/** --------------------------------
- -- users
--------------------------------- */
-		.admins .box .admin {
-			background-color: var(--dk-dark-bg);
-		}
-
-		.admins .box h3 {
-			color: var(--dk-gray-300);
-		}
-
-		.admins .box p {
-			color: var(--dk-gray-400)
-		}
-
-
-
-
-		/** --------------------------------
- -- statis
--------------------------------- */
-		.statis {
-			color: var(--dk-gray-100);
-		}
-
-		.statis .box {
-			position: relative;
-			overflow: hidden;
-			border-radius: 3px;
-		}
-
-		.statis .box h3:after {
-			content: "";
-			height: 2px;
-			width: 70%;
-			margin: auto;
-			background-color: rgba(255, 255, 255, 0.12);
-			display: block;
-			margin-top: 10px;
-		}
-
-		.statis .box i {
-			position: absolute;
-			height: 70px;
-			width: 70px;
-			font-size: 22px;
-			padding: 15px;
-			top: -25px;
-			left: -25px;
-			background-color: rgba(255, 255, 255, 0.15);
-			line-height: 60px;
-			text-align: right;
-			border-radius: 50%;
-		}
-
-
-
-
-
-		.main-color {
-			color: #ffc107
-		}
-
-
-		.navbar {
-			background-color: var(--navbar-bg-color) !important;
-			border: none !important;
-		}
-
-		.navbar .dropdown-menu {
-			right: auto !important;
-			left: 0 !important;
-		}
-
-		.navbar .navbar-nav>li>a {
-			color: #EEE !important;
-			line-height: 55px !important;
-			padding: 0 10px !important;
-		}
-
-		.navbar .navbar-brand {
-			color: #FFF !important
-		}
-
-		.navbar .navbar-nav>li>a:focus,
-		.navbar .navbar-nav>li>a:hover {
-			color: #EEE !important
-		}
-
-		.navbar .navbar-nav>.open>a,
-		.navbar .navbar-nav>.open>a:focus,
-		.navbar .navbar-nav>.open>a:hover {
-			background-color: transparent !important;
-			color: #FFF !important
-		}
-
-		.navbar .navbar-brand {
-			line-height: 55px !important;
-			padding: 0 !important
-		}
-
-		.navbar .navbar-brand:focus,
-		.navbar .navbar-brand:hover {
-			color: #FFF !important
-		}
-
-		.navbar>.container .navbar-brand,
-		.navbar>.container-fluid .navbar-brand {
-			margin: 0 !important
-		}
-
-		@media (max-width: 767px) {
-			.navbar>.container-fluid .navbar-brand {
-				margin-left: 15px !important;
-			}
-
-			.navbar .navbar-nav>li>a {
-				padding-left: 0 !important;
-			}
-
-			.navbar-nav {
-				margin: 0 !important;
-			}
-
-			.navbar .navbar-collapse,
-			.navbar .navbar-form {
-				border: none !important;
-			}
-		}
-
-		.navbar .navbar-nav>li>a {
-			float: left !important;
-		}
-
-		.navbar .navbar-nav>li>a>span:not(.caret) {
-			background-color: #e74c3c !important;
-			border-radius: 50% !important;
-			height: 25px !important;
-			width: 25px !important;
-			padding: 2px !important;
-			font-size: 11px !important;
-			position: relative !important;
-			top: -10px !important;
-			right: 5px !important
-		}
-
-		.dropdown-menu>li>a {
-			padding-top: 5px !important;
-			padding-right: 5px !important;
-		}
-
-		.navbar .navbar-nav>li>a>i {
-			font-size: 18px !important;
-		}
-
-
-
-
-		/* Start media query */
-
-		@media (max-width: 767px) {
-			#wrapper {
-				margin: 0 !important
-			}
-
-			.statistics .box {
-				margin-bottom: 25px !important;
-			}
-
-			.navbar .navbar-nav .open .dropdown-menu>li>a {
-				color: #CCC !important
-			}
-
-			.navbar .navbar-nav .open .dropdown-menu>li>a:hover {
-				color: #FFF !important
-			}
-
-			.navbar .navbar-toggle {
-				border: none !important;
-				color: #EEE !important;
-				font-size: 18px !important;
-			}
-
-			.navbar .navbar-toggle:focus,
-			.navbar .navbar-toggle:hover {
-				background-color: transparent !important
-			}
-		}
-
-
-		::-webkit-scrollbar {
-			background: transparent;
-			width: 5px;
-			height: 5px;
-		}
-
-		::-webkit-scrollbar-thumb {
-			background-color: #3c3f58;
-		}
-
-		::-webkit-scrollbar-thumb:hover {
-			background-color: rgba(0, 0, 0, 0.3);
-		}
-
-		.dropbtn {
-			background-color: #6F6486;
-			color: #fff;
-			padding: 16px;
-			font-size: 20px;
-			border: none;
-			cursor: pointer;
-		}
-
-		.dropdown {
-			position: relative;
-			display: inline-block;
-		}
-
-		.dropdown-content {
-			display: none;
-			position: absolute;
-			right: 0;
-			background-color: #f9f9f9;
-			min-width: 160px;
-			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-			z-index: 1;
-		}
-
-		.dropdown-content a {
-			color: black;
-			padding: 12px 16px;
-			text-decoration: none;
-			display: block;
-		}
-
-		.dropdown-content a:hover {
-			background-color: #6f6486;
-		}
-
-		.dropdown:hover .dropdown-content {
-			display: block;
-		}
-
-		.dropdown:hover .dropbtn {
-			background-color: #322946;
-		}
-	</style>
-
-	<body>
-
-		<aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
-			<i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
-			<div class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
-				<img class="rounded-pill img-fluid" width="65" src="/images/music.png" alt="">
-				<div class="ms-2">
-					<h5 class="fs-6 mb-0">
-						<a class="text-decoration-none" href="#">WELCOME</a>
-					</h5>
-					<p class="mt-1 mb-0">Start sharing!</p>
-				</div>
-			</div>
-
-			<div class="search position-relative text-center px-4 py-3 mt-2">
-				<input type="text" class="form-control w-100 border-0 bg-transparent" style="color: #FFF;"
-					placeholder="Search here">
-				<i class="fa fa-search position-absolute d-block fs-6"></i>
-			</div>
-
-			<ul class="categories list-unstyled">
-				<li>
-					<i class="fa fa-users" aria-hidden="true"></i><a href="#"> Our Users </a>
-				</li>
-				<li>
-					<i class="fa fa-music" aria-hidden="true"></i><a href="#"> Music News </a>
-				</li>
-				<li>
-					<i class="fas fa-crown" aria-hidden="true"></i><a href="#"> Taylor Swift </a>
-				</li>
-				<li>
-					<i class="fas fa-quote-right"></i><a href="#"> Music Quotes</a>
-				</li>
-				<li>
-					<i class="fab fa-youtube"></i><a href="#"> Music Videos </a>
-				</li>
-				<li>
-					<i class="fas fa-heart-broken"></i><a href="#"> Heartbreak Songs </a>
-				</li>
-				<li>
-					<i class="fas fa-chart-line"></i><a href="#"> Charts Songs </a>
-				</li>
-				<li>
-					<i class="fas fa-globe-americas"></i><a href="#"> By Location </a>
-				</li>
-			</ul>
-		</aside>
-
-		<section id="wrapper">
-			<nav class="navbar navbar-expand-md">
-				<div class="container-fluid mx-2">
-					<div class="navbar-header">
-						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-							data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<i class="uil-bars text-white"></i>
-						</button>
-						<a class="navbar-brand" href="#">Share<span class="main-color"> Your Music!</span></a>
-					</div>
-						<% if(locals.isLogged) { %>
-						<div class="dropdown" style="right: 0; border-bottom: 3px solid #ffc107;">
-							<button class="dropbtn"><img height=30 width=30 src="/images/avatars/<%= locals.userLogged.SRC_Image %>"> Hola, <%= locals.userLogged.Name %> </button>
-							<div class="dropdown-content">
-								<a href="/user/profile"> <img src="/images/enter.png">My profile</a>
-								<a href="/user/logout"> <img src="/images/sign-up.png"> Log out</a>
-							</div>
-						</div>
-						<% } else { %>
-							<div class="dropdown" style="right: 0; border-bottom: 3px solid #ffc107;">
-								<button class="dropbtn"><img height=30 width=30 src="/images/avatars/user.png">My account</button>
-								<div class="dropdown-content">
-									<a href="/user/profile"> <img src="/images/enter.png">Log In</a>
-									<a href="/user/logout"> <img src="/images/sign-up.png">Sign Up</a>
-								</div>
-							</div>
-						<% } %>
-				</div>
-			</nav>
-
-			<div class="p-4">
-				<div class="welcome">
-					<div class="content rounded-3 p-3">
-						<h1 class="fs-3">Welcome to ShareYourMusic!</h1>
-						<p class="mb-0">It is a social network where you can find and share everything related to music.
-							Sing up and have fun!
-						</p>
-					</div>
-				</div> <br>
-
-				<div class="welcome">
-					<div class="content rounded-3 p-3">
-						<h1 class="fs-3">Featured Posts <img src="/images/musical-notes.png"> </h1>
-					</div>
-				</div>
-				
-
-				<section class="charts mt-4">
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="chart-container rounded-2 p-3">
-								<h3 class="fs-6 mb-3">Chart title number one</h3>
-								<canvas id="myChart"></canvas>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="chart-container rounded-2 p-3">
-								<h3 class="fs-6 mb-3">Chart title number two</h3>
-								<canvas id="myChart2"></canvas>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section class="admins mt-4">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="box">
-								<!-- <h4>Admins:</h4> -->
-								<div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
-									<div class="img">
-										<img class="img-fluid rounded-pill" width="75" height="75"
-											src="/images/Team/josue.png"
-											alt="admin">
-									</div>
-									<div class="ms-3">
-										<h3 class="fs-5 mb-1">Josue Vazquez Franco</h3>
-										<p class="mb-0">Computer Systems Engineer Student</p>
-									</div>
-								</div>
-								<div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
-									<div class="img">
-										<img class="img-fluid rounded-pill" width="75" height="75"
-											src="/images/Team/pablo.png"
-											alt="admin">
-									</div>
-									<div class="ms-3">
-										<h3 class="fs-5 mb-1">Juan Pablo Marquez</h3>
-										<p class="mb-0">Computer Systems Engineer Student</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="box">
-								<!-- <h4>Moderators:</h4> -->
-								<div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
-									<div class="img">
-										<img class="img-fluid rounded-pill" width="75" height="75"
-											src="/images/Team/vero.png"
-											alt="admin">
-									</div>
-									<div class="ms-3">
-										<h3 class="fs-5 mb-1">Veronica Romo Franco</h3>
-										<p class="mb-0">Computer Systems Engineer Student</p>
-									</div>
-								</div>
-								<div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
-									<div class="img">
-										<img class="img-fluid rounded-pill" width="75" height="75"
-											src="/images/Team/irving.jpg"
-											alt="admin">
-									</div>
-									<div class="ms-3">
-										<h3 class="fs-5 mb-1">Irving Cardona Camacho</h3>
-										<p class="mb-0">Computer Systems Engineer Student</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
-				<section class="statis mt-4 text-center">
-					<div class="row">
-						<div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-							<div class="box bg-primary p-3">
-								<i class="uil-eye"></i>
-								<h3>5,154</h3>
-								<p class="lead">Total of Posts</p>
-							</div>
-						</div>
-						<div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-							<div class="box bg-danger p-3">
-								<i class="uil-user"></i>
-								<h3>245</h3>
-								<p class="lead">User registered</p>
-							</div>
-						</div>
-						<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-							<div class="box bg-warning p-3">
-								<i class="uil-shopping-cart"></i>
-								<h3>5,154</h3>
-								<p class="lead">Categories</p>
-							</div>
-						</div>
-						<div class="col-md-6 col-lg-3">
-							<div class="box bg-success p-3">
-								<i class="uil-feedback"></i>
-								<h3>0004</h3>
-								<p class="lead">Team Work</p>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-		</section>
-
-
-		<script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
-		<script src="/public/js/home.js"></script>
-		<script src="https://use.fontawesome.com/96171fdafb.js"></script>
-		<script src="https://kit.fontawesome.com/cf85f829dd.js" crossorigin="anonymous"></script>
-
-	</body>
-
+  <%- include('partials/head'); %>
+  <body>
+    <aside
+      class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left"
+      id="show-side-navigation1"
+    >
+      <i
+        class="uil-bars close-aside d-md-none d-lg-none"
+        data-close="show-side-navigation1"
+      ></i>
+      <div
+        class="
+          sidebar-header
+          d-flex
+          justify-content-center
+          align-items-center
+          px-3
+          py-4
+        "
+      >
+        <img
+          class="rounded-pill img-fluid"
+          width="65"
+          src="/images/music.png"
+          alt=""
+        />
+        <div class="ms-2">
+          <h5 class="fs-6 mb-0">
+            <a class="text-decoration-none" href="#">WELCOME</a>
+          </h5>
+          <p class="mt-1 mb-0">Start sharing!</p>
+        </div>
+      </div>
+
+      <div class="search position-relative text-center px-4 py-3 mt-2">
+        <input
+          type="text"
+          class="form-control w-100 border-0 bg-transparent"
+          style="color: #fff"
+          placeholder="Search here"
+        />
+        <i class="fa fa-search position-absolute d-block fs-6"></i>
+      </div>
+
+      <ul class="categories list-unstyled">
+        <li>
+          <i class="fa fa-users" aria-hidden="true"></i
+          ><a href="#"> Our Users </a>
+        </li>
+        <li>
+          <i class="fa fa-music" aria-hidden="true"></i
+          ><a href="#"> Music News </a>
+        </li>
+        <li>
+          <i class="fas fa-crown" aria-hidden="true"></i
+          ><a href="#"> Taylor Swift </a>
+        </li>
+        <li><i class="fas fa-quote-right"></i><a href="#"> Music Quotes</a></li>
+        <li><i class="fab fa-youtube"></i><a href="#"> Top Music Videos </a></li>
+        <li>
+          <i class="fas fa-heart-broken"></i><a href="#"> Heartbreak Songs </a>
+        </li>
+        <li><i class="fas fa-chart-line"></i><a href="#"> Charts Songs </a></li>
+        <li>
+          <i class="fas fa-globe-americas"></i><a href="#"> By Location </a>
+        </li>
+          <% if(locals.isLogged) { %>
+			<li>
+				<i class="fas fa-edit"></i><a href="#open-modal"> Create a Post </a>
+			</li>
+          <%}%>
+      </ul>
+    </aside>
+
+    <section id="wrapper">
+      <nav class="navbar navbar-expand-md">
+        <div class="container-fluid mx-2">
+          <div class="navbar-header">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#toggle-navbar"
+              aria-controls="toggle-navbar"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <i class="uil-bars text-white"></i>
+            </button>
+            <a class="navbar-brand" href="#"
+              >Share<span class="main-color"> Your Music!</span></a
+            >
+          </div>
+          <% if(locals.isLogged) { %>
+          <div
+            class="dropdown"
+            style="right: 0; border-bottom: 3px solid #ffc107"
+          >
+            <button class="dropbtn">
+              <img
+                height="30"
+                width="30"
+                src="/images/avatars/<%= locals.userLogged.SRC_Image %>"
+              />
+              Hola, <%= locals.userLogged.Name %>
+            </button>
+            <div class="dropdown-content">
+              <a href="/user/profile">
+                <img src="/images/enter.png" />My profile</a
+              >
+              <a href="/user/logout">
+                <img src="/images/sign-up.png" /> Log out</a
+              >
+            </div>
+          </div>
+          <% } else { %>
+          <div
+            class="dropdown"
+            style="right: 0; border-bottom: 3px solid #ffc107"
+          >
+            <button class="dropbtn">
+              <img
+                style="border-radius: 50%"
+                id="imagen"
+                height="30"
+                width="30"
+                src="/images/avatars/default.png"
+              />
+              My account
+            </button>
+            <div class="dropdown-content">
+              <a href="/user/profile"> <img src="/images/enter.png" />Log In</a>
+              <a href="/user/logout">
+                <img src="/images/sign-up.png" />Sign Up</a
+              >
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </nav>
+
+      <div class="p-4">
+        <div class="welcome">
+          <div class="content rounded-3 p-3">
+            <h1 class="fs-3">Welcome to ShareYourMusic!</h1>
+            <p class="mb-0">
+              It is a social network where you can find and share everything
+              related to music. Sing up and have fun!
+            </p>
+          </div>
+        </div>
+        <br />
+
+        <div class="welcome">
+          <div class="content rounded-3 p-3">
+            <h1 class="fs-3">
+              Featured Posts <img src="/images/musical-notes.png" />
+            </h1>
+          </div>
+        </div>
+
+        <br />
+        <div id="open-modal" class="modal-window">
+          <div>
+            <a href="#" title="Close" class="modal-close">Close</a>
+            <h1>Voilà!</h1>
+            <div>
+              A CSS-only modal based on the :target pseudo-class. Hope you find
+              it helpful.
+            </div>
+            <div><small>Check out</small></div>
+          </div>
+        </div>
+        <% if(locals.isLogged) { %>
+        <!-- publication -->
+        <div class="tweetBox">
+          <form>
+            <div class="tweetbox__input">
+              <div
+                onclick="loadPage('profile')"
+                class="tweetbox__input__profileimage"
+              >
+                <img
+				  src="/images/avatars/<%= locals.userLogged.SRC_Image %>"
+                  alt="Profile"
+                />
+              </div>
+			  <div class="inputt">
+				  <a href="#open-modal"> ✍🏼 Create a Post </a>
+			  </div>
+            </div>
+          </form>
+        </div>
+        <!-- ends -->
+        <%}%>
+
+        <section class="admins mt-4">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="box">
+                <!-- <h4>Admins:</h4> -->
+                <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                  <div class="img">
+                    <img
+                      class="img-fluid rounded-pill"
+                      width="75"
+                      height="75"
+                      src="/images/Team/josue.png"
+                      alt="admin"
+                    />
+                  </div>
+                  <div class="ms-3">
+                    <h3 class="fs-5 mb-1">Josue Vazquez Franco</h3>
+                    <p class="mb-0">Computer Systems Engineer Student</p>
+                  </div>
+                </div>
+                <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                  <div class="img">
+                    <img
+                      class="img-fluid rounded-pill"
+                      width="75"
+                      height="75"
+                      src="/images/Team/pablo.png"
+                      alt="admin"
+                    />
+                  </div>
+                  <div class="ms-3">
+                    <h3 class="fs-5 mb-1">Juan Pablo Marquez</h3>
+                    <p class="mb-0">Computer Systems Engineer Student</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="box">
+                <!-- <h4>Moderators:</h4> -->
+                <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                  <div class="img">
+                    <img
+                      class="img-fluid rounded-pill"
+                      width="75"
+                      height="75"
+                      src="/images/Team/vero.png"
+                      alt="admin"
+                    />
+                  </div>
+                  <div class="ms-3">
+                    <h3 class="fs-5 mb-1">Veronica Romo Franco</h3>
+                    <p class="mb-0">Computer Systems Engineer Student</p>
+                  </div>
+                </div>
+                <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                  <div class="img">
+                    <img
+                      class="img-fluid rounded-pill"
+                      width="75"
+                      height="75"
+                      src="/images/Team/irving.jpg"
+                      alt="admin"
+                    />
+                  </div>
+                  <div class="ms-3">
+                    <h3 class="fs-5 mb-1">Irving Cardona Camacho</h3>
+                    <p class="mb-0">Computer Systems Engineer Student</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="statis mt-4 text-center">
+          <div class="row">
+            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+              <div class="box bg-primary p-3">
+                <i class="uil-eye"></i>
+                <h3>5,154</h3>
+                <p class="lead">Total of Posts</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+              <div class="box bg-danger p-3">
+                <i class="uil-user"></i>
+                <h3>245</h3>
+                <p class="lead">User registered</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+              <div class="box bg-warning p-3">
+                <i class="uil-shopping-cart"></i>
+                <h3>5,154</h3>
+                <p class="lead">Categories</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="box bg-success p-3">
+                <i class="uil-feedback"></i>
+                <h3>0004</h3>
+                <p class="lead">Team Work</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <script src="/public/js/home.js"></script>
+    <script src="https://use.fontawesome.com/96171fdafb.js"></script>
+    <script
+      src="https://kit.fontawesome.com/cf85f829dd.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

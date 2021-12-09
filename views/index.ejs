@@ -1,31 +1,133 @@
 <!DOCTYPE html>
 <html lang="es">
-  <%- include('partials/head'); %>
+<%- include('partials/head'); %>
+
+  <head>
+    <style>
+      .modal-window {
+        position: fixed;
+        background-color: rgba(100, 97, 97, 0.25);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s;
+      }
+
+      .modal-window:target {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-window>div {
+        width: 500px;
+        position: absolute;
+        top: 50%;
+        left: 52%;
+        transform: translate(-50%, -50%);
+        padding: 2em;
+        color: #fff;
+        background: #252636;
+      }
+
+      .modal-window header {
+        font-weight: bold;
+      }
+
+      .modal-window h1 {
+        font-size: 150%;
+        margin: 0 0 15px;
+      }
+
+      .modal-close {
+        color: #aaa;
+        line-height: 50px;
+        font-size: 80%;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 0;
+        width: 70px;
+        text-decoration: none;
+      }
+
+      .modal-close:hover {
+        color: black;
+      }
+
+      .modal-window>div {
+        border-radius: 1rem;
+      }
+
+      .modal-window div:not(:last-of-type) {
+        margin-bottom: 15px;
+      }
+
+      .btn {
+        background-color: white;
+        padding: 1em 1.5em;
+        border-radius: 1rem;
+        text-decoration: none;
+      }
+
+      #postarea {
+        border-style: none;
+        border-color: Transparent;
+        overflow: auto;
+        padding: 5px;
+        color: #fff;
+        background: #252636;
+
+        border: none;
+        overflow: auto;
+        outline: none;
+
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+
+      #opciones{
+        padding: 5px;
+        color: #fff;
+        background: #252636;
+        border-style: none;
+        border-color: Transparent;
+      }
+
+      #sharebutton {
+        color: white;
+        background: rgb(29, 24, 31);
+        font-weight: 900;
+        font-size: 12px;
+        border-radius: 30px;
+        width: 80px;
+        height: 40px;
+        margin-left: 350px;
+      }
+
+      #sharebutton:hover{
+        background: rgb(81, 60, 82);
+      }
+    </style>
+  </head>
+
   <body>
-    <aside
-      class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left"
-      id="show-side-navigation1"
-    >
-      <i
-        class="uil-bars close-aside d-md-none d-lg-none"
-        data-close="show-side-navigation1"
-      ></i>
-      <div
-        class="
+    <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
+      <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
+      <div class="
           sidebar-header
           d-flex
           justify-content-center
           align-items-center
           px-3
           py-4
-        "
-      >
-        <img
-          class="rounded-pill img-fluid"
-          width="65"
-          src="/images/music.png"
-          alt=""
-        />
+        ">
+        <img class="rounded-pill img-fluid" width="65" src="/images/music.png" alt="" />
         <div class="ms-2">
           <h5 class="fs-6 mb-0">
             <a class="text-decoration-none" href="#">WELCOME</a>
@@ -35,27 +137,20 @@
       </div>
 
       <div class="search position-relative text-center px-4 py-3 mt-2">
-        <input
-          type="text"
-          class="form-control w-100 border-0 bg-transparent"
-          style="color: #fff"
-          placeholder="Search here"
-        />
+        <input type="text" class="form-control w-100 border-0 bg-transparent" style="color: #fff"
+          placeholder="Search here" />
         <i class="fa fa-search position-absolute d-block fs-6"></i>
       </div>
 
       <ul class="categories list-unstyled">
         <li>
-          <i class="fa fa-users" aria-hidden="true"></i
-          ><a href="#"> Our Users </a>
+          <i class="fa fa-users" aria-hidden="true"></i><a href="#"> Our Users </a>
         </li>
         <li>
-          <i class="fa fa-music" aria-hidden="true"></i
-          ><a href="#"> Music News </a>
+          <i class="fa fa-music" aria-hidden="true"></i><a href="#"> Music News </a>
         </li>
         <li>
-          <i class="fas fa-crown" aria-hidden="true"></i
-          ><a href="#"> Taylor Swift </a>
+          <i class="fas fa-crown" aria-hidden="true"></i><a href="#"> Taylor Swift </a>
         </li>
         <li><i class="fas fa-quote-right"></i><a href="#"> Music Quotes</a></li>
         <li><i class="fab fa-youtube"></i><a href="#"> Top Music Videos </a></li>
@@ -66,10 +161,10 @@
         <li>
           <i class="fas fa-globe-americas"></i><a href="#"> By Location </a>
         </li>
-          <% if(locals.isLogged) { %>
-			<li>
-				<i class="fas fa-edit"></i><a href="#open-modal"> Create a Post </a>
-			</li>
+        <% if(locals.isLogged) { %>
+          <li>
+            <i class="fas fa-edit"></i><a href="#open-modal"> Create a Post </a>
+          </li>
           <%}%>
       </ul>
     </aside>
@@ -78,66 +173,39 @@
       <nav class="navbar navbar-expand-md">
         <div class="container-fluid mx-2">
           <div class="navbar-header">
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#toggle-navbar"
-              aria-controls="toggle-navbar"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar"
+              aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
               <i class="uil-bars text-white"></i>
             </button>
-            <a class="navbar-brand" href="#"
-              >Share<span class="main-color"> Your Music!</span></a
-            >
+            <a class="navbar-brand" href="#">Share<span class="main-color"> Your Music!</span></a>
           </div>
           <% if(locals.isLogged) { %>
-          <div
-            class="dropdown"
-            style="right: 0; border-bottom: 3px solid #ffc107"
-          >
-            <button class="dropbtn">
-              <img
-                height="30"
-                width="30"
-                src="/images/avatars/<%= locals.userLogged.SRC_Image %>"
-              />
-              Hola, <%= locals.userLogged.Name %>
-            </button>
-            <div class="dropdown-content">
-              <a href="/user/profile">
-                <img src="/images/enter.png" />My profile</a
-              >
-              <a href="/user/logout">
-                <img src="/images/sign-up.png" /> Log out</a
-              >
+            <div class="dropdown" style="right: 0; border-bottom: 3px solid #ffc107">
+              <button class="dropbtn">
+                <img height="30" width="30" src="/images/avatars/<%= locals.userLogged.SRC_Image %>" />
+                Hola, <%= locals.userLogged.Name %>
+              </button>
+              <div class="dropdown-content">
+                <a href="/user/profile">
+                  <img src="/images/enter.png" />My profile</a>
+                <a href="/user/logout">
+                  <img src="/images/sign-up.png" /> Log out</a>
+              </div>
             </div>
-          </div>
-          <% } else { %>
-          <div
-            class="dropdown"
-            style="right: 0; border-bottom: 3px solid #ffc107"
-          >
-            <button class="dropbtn">
-              <img
-                style="border-radius: 50%"
-                id="imagen"
-                height="30"
-                width="30"
-                src="/images/avatars/default.png"
-              />
-              My account
-            </button>
-            <div class="dropdown-content">
-              <a href="/user/profile"> <img src="/images/enter.png" />Log In</a>
-              <a href="/user/logout">
-                <img src="/images/sign-up.png" />Sign Up</a
-              >
-            </div>
-          </div>
-          <% } %>
+            <% } else { %>
+              <div class="dropdown" style="right: 0; border-bottom: 3px solid #ffc107">
+                <button class="dropbtn">
+                  <img style="border-radius: 50%" id="imagen" height="30" width="30"
+                    src="/images/avatars/default.png" />
+                  My account
+                </button>
+                <div class="dropdown-content">
+                  <a href="/user/profile"> <img src="/images/enter.png" />Log In</a>
+                  <a href="/user/logout">
+                    <img src="/images/sign-up.png" />Sign Up</a>
+                </div>
+              </div>
+              <% } %>
         </div>
       </nav>
 
@@ -165,153 +233,143 @@
         <div id="open-modal" class="modal-window">
           <div>
             <a href="#" title="Close" class="modal-close">Close</a>
-            <h1>Voilà!</h1>
-            <div>
-              A CSS-only modal based on the :target pseudo-class. Hope you find
-              it helpful.
-            </div>
-            <div><small>Check out</small></div>
+            <hr>
+            <h1>
+              <ion-icon name="create-outline"></ion-icon> New Post
+            </h1>
+            <form action="/createPost" method="POST" enctype="multipart/form-data" >
+              <div>
+                <textarea name="Text" id="postarea" cols="50" placeholder="What's happenig?" rows="5"></textarea>
+              </div>
+              <select id="opciones" style="font-size: 14px;" name="Category">
+                <option class="control">Choose a category</option>
+                <% let opciones=['Music News', 'Music Quotes' , 'Heartbreak Songs' , 'Taylor Swift']; %>
+                  <% for (const oneOption of opciones) { %>
+                    <option value="<%= oneOption %>">
+                      <%= oneOption %>
+                    </option>
+                    <% } %>
+              </select>
+              <hr>
+              <div><button type="submit" id="sharebutton">Share!</button></div>
+            </form>
           </div>
         </div>
         <% if(locals.isLogged) { %>
-        <!-- publication -->
-        <div class="tweetBox">
-          <form>
-            <div class="tweetbox__input">
-              <div
-                onclick="loadPage('profile')"
-                class="tweetbox__input__profileimage"
-              >
-                <img
-				  src="/images/avatars/<%= locals.userLogged.SRC_Image %>"
-                  alt="Profile"
-                />
-              </div>
-			  <div class="inputt">
-				  <a href="#open-modal"> ✍🏼 Create a Post </a>
-			  </div>
-            </div>
-          </form>
-        </div>
-        <!-- ends -->
-        <%}%>
-
-        <section class="admins mt-4">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="box">
-                <!-- <h4>Admins:</h4> -->
-                <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
-                  <div class="img">
-                    <img
-                      class="img-fluid rounded-pill"
-                      width="75"
-                      height="75"
-                      src="/images/Team/josue.png"
-                      alt="admin"
-                    />
-                  </div>
-                  <div class="ms-3">
-                    <h3 class="fs-5 mb-1">Josue Vazquez Franco</h3>
-                    <p class="mb-0">Computer Systems Engineer Student</p>
-                  </div>
+          <!-- publication -->
+          <div class="tweetBox">
+            <form>
+              <div class="tweetbox__input">
+                <div onclick="loadPage('profile')" class="tweetbox__input__profileimage">
+                  <img src="/images/avatars/<%= locals.userLogged.SRC_Image %>" alt="Profile" />
                 </div>
-                <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
-                  <div class="img">
-                    <img
-                      class="img-fluid rounded-pill"
-                      width="75"
-                      height="75"
-                      src="/images/Team/pablo.png"
-                      alt="admin"
-                    />
-                  </div>
-                  <div class="ms-3">
-                    <h3 class="fs-5 mb-1">Juan Pablo Marquez</h3>
-                    <p class="mb-0">Computer Systems Engineer Student</p>
-                  </div>
+                <div class="inputt">
+                  <a href="#open-modal">
+                    <ion-icon name="create-outline"></ion-icon> Create a Post
+                  </a>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6">
-              <div class="box">
-                <!-- <h4>Moderators:</h4> -->
-                <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
-                  <div class="img">
-                    <img
-                      class="img-fluid rounded-pill"
-                      width="75"
-                      height="75"
-                      src="/images/Team/vero.png"
-                      alt="admin"
-                    />
-                  </div>
-                  <div class="ms-3">
-                    <h3 class="fs-5 mb-1">Veronica Romo Franco</h3>
-                    <p class="mb-0">Computer Systems Engineer Student</p>
-                  </div>
-                </div>
-                <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
-                  <div class="img">
-                    <img
-                      class="img-fluid rounded-pill"
-                      width="75"
-                      height="75"
-                      src="/images/Team/irving.jpg"
-                      alt="admin"
-                    />
-                  </div>
-                  <div class="ms-3">
-                    <h3 class="fs-5 mb-1">Irving Cardona Camacho</h3>
-                    <p class="mb-0">Computer Systems Engineer Student</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </form>
           </div>
-        </section>
+          <!-- ends -->
+          <%}%>
 
-        <section class="statis mt-4 text-center">
-          <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <div class="box bg-primary p-3">
-                <i class="uil-eye"></i>
-                <h3>5,154</h3>
-                <p class="lead">Total of Posts</p>
+            <section class="admins mt-4">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="box">
+                    <!-- <h4>Admins:</h4> -->
+                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                      <div class="img">
+                        <img class="img-fluid rounded-pill" width="75" height="75" src="/images/Team/josue.png"
+                          alt="admin" />
+                      </div>
+                      <div class="ms-3">
+                        <h3 class="fs-5 mb-1">Josue Vazquez Franco</h3>
+                        <p class="mb-0">Computer Systems Engineer Student</p>
+                      </div>
+                    </div>
+                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                      <div class="img">
+                        <img class="img-fluid rounded-pill" width="75" height="75" src="/images/Team/pablo.png"
+                          alt="admin" />
+                      </div>
+                      <div class="ms-3">
+                        <h3 class="fs-5 mb-1">Juan Pablo Marquez</h3>
+                        <p class="mb-0">Computer Systems Engineer Student</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="box">
+                    <!-- <h4>Moderators:</h4> -->
+                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                      <div class="img">
+                        <img class="img-fluid rounded-pill" width="75" height="75" src="/images/Team/vero.png"
+                          alt="admin" />
+                      </div>
+                      <div class="ms-3">
+                        <h3 class="fs-5 mb-1">Veronica Romo Franco</h3>
+                        <p class="mb-0">Computer Systems Engineer Student</p>
+                      </div>
+                    </div>
+                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                      <div class="img">
+                        <img class="img-fluid rounded-pill" width="75" height="75" src="/images/Team/irving.jpg"
+                          alt="admin" />
+                      </div>
+                      <div class="ms-3">
+                        <h3 class="fs-5 mb-1">Irving Cardona Camacho</h3>
+                        <p class="mb-0">Computer Systems Engineer Student</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <div class="box bg-danger p-3">
-                <i class="uil-user"></i>
-                <h3>245</h3>
-                <p class="lead">User registered</p>
+            </section>
+
+            <section class="statis mt-4 text-center">
+              <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <div class="box bg-primary p-3">
+                    <i class="uil-eye"></i>
+                    <h3>5,154</h3>
+                    <p class="lead">Total of Posts</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <div class="box bg-danger p-3">
+                    <i class="uil-user"></i>
+                    <h3>245</h3>
+                    <p class="lead">User registered</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                  <div class="box bg-warning p-3">
+                    <i class="uil-shopping-cart"></i>
+                    <h3>5,154</h3>
+                    <p class="lead">Categories</p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                  <div class="box bg-success p-3">
+                    <i class="uil-feedback"></i>
+                    <h3>0004</h3>
+                    <p class="lead">Team Work</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-              <div class="box bg-warning p-3">
-                <i class="uil-shopping-cart"></i>
-                <h3>5,154</h3>
-                <p class="lead">Categories</p>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="box bg-success p-3">
-                <i class="uil-feedback"></i>
-                <h3>0004</h3>
-                <p class="lead">Team Work</p>
-              </div>
-            </div>
-          </div>
-        </section>
+            </section>
       </div>
     </section>
 
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
     <script src="/public/js/home.js"></script>
     <script src="https://use.fontawesome.com/96171fdafb.js"></script>
-    <script
-      src="https://kit.fontawesome.com/cf85f829dd.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/cf85f829dd.js" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>
+
 </html>

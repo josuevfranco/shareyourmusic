@@ -70,7 +70,7 @@ module.exports = {
 				req.session.userLogged = userToLogin
 				
                 
-				return res.render('index');
+				return res.redirect('/');
 
             }else{
 				return res.render('userLoginForm', {

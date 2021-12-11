@@ -113,6 +113,15 @@
       #sharebutton:hover{
         background: rgb(81, 60, 82);
       }
+
+      #imagenLike:hover{
+        -webkit-transform:scale(1.25);
+        -moz-transform:scale(1.25);
+        -ms-transform:scale(1.25);
+        -o-transform:scale(1.25);
+        transform:scale(1.25);
+      }
+
     </style>
   </head>
 
@@ -153,7 +162,7 @@
           <i class="fas fa-crown" aria-hidden="true"></i><a href="#"> Taylor Swift </a>
         </li>
         <li><i class="fas fa-quote-right"></i><a href="#"> Music Quotes</a></li>
-        <li><i class="fab fa-youtube"></i><a href="#"> Top Music Videos </a></li>
+        <li><i class="fab fa-youtube"></i><a href="/youtubeTop"> Top Music Videos </a></li>
         <li>
           <i class="fas fa-heart-broken"></i><a href="#"> Heartbreak Songs </a>
         </li>
@@ -200,9 +209,9 @@
                   My account
                 </button>
                 <div class="dropdown-content">
-                  <a href="/user/profile"> <img src="/images/enter.png" />Log In</a>
+                  <a href="/user/profile"> <img width="16" height="16" src="/images/enter.png" /> Log In</a>
                   <a href="/user/logout">
-                    <img src="/images/sign-up.png" />Sign Up</a>
+                    <img  width="16" height="16" src="/images/sign-up.png" /> Sign Up</a>
                 </div>
               </div>
               <% } %>
@@ -237,11 +246,11 @@
             <h1>
               <ion-icon name="create-outline"></ion-icon> New Post
             </h1>
-            <form action="/createPost" method="POST" enctype="multipart/form-data" >
+            <form action="/createPost" method="POST" class="productForm" >
               <div>
                 <textarea name="Text" id="postarea" cols="50" placeholder="What's happenig?" rows="5"></textarea>
               </div>
-              <select id="opciones" style="font-size: 14px;" name="Category">
+              <select id="opciones" style="font-size: 14px;" name="opciones">
                 <option class="control">Choose a category</option>
                 <% let opciones=['Music News', 'Music Quotes' , 'Heartbreak Songs' , 'Taylor Swift']; %>
                   <% for (const oneOption of opciones) { %>
@@ -273,6 +282,30 @@
           </div>
           <!-- ends -->
           <%}%>
+
+  
+          <% for(let i = 0; i < Posts.length; i++) { %>
+            <section class="admins mt-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="box">
+                    <!-- <h4>Admins:</h4> -->
+                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                      <div class="img">
+                        <img class="img-fluid rounded-pill" width="75" height="75" src="/images/Team/josue.png"
+                          alt="admin" />
+                      </div>
+                      <div class="ms-3">
+                        <h3 class="fs-5 mb-1"> @<%= Posts[i].Username %> </h3>
+                        <p class="mb-0"> <%= Posts[i].Text %> </p>
+                        <img id="imagenLike" width="16" height="16" src="/images/like.png">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          <% }%>
 
             <section class="admins mt-4">
               <div class="row">
@@ -348,7 +381,7 @@
                 <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
                   <div class="box bg-warning p-3">
                     <i class="uil-shopping-cart"></i>
-                    <h3>5,154</h3>
+                    <h3>0004</h3>
                     <p class="lead">Categories</p>
                   </div>
                 </div>

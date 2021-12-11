@@ -3,13 +3,8 @@
         /* CSS design originally by @jofpin, tweaked by Colt Steele */
         @import url(https://fonts.googleapis.com/css?family=Raleway|Varela+Round|Coda);
 
-        body {
-            background: #ecf0f1;
-            padding: 2.23em;
-        }
-
         .title {
-            color: #2c3e50;
+            color: #dee2e7;
             font-family: "Coda", sans-serif;
             text-align: center;
         }
@@ -18,7 +13,7 @@
             margin: auto;
             width: 27em;
             height: 11em;
-            background: #fff;
+            background: rgb(251, 250, 251);
             border-radius: .3em;
         }
 
@@ -26,7 +21,8 @@
             margin: auto;
             margin-top: -4.40em;
             margin-left: 5.80em;
-            color: #16a085;
+            padding-top: 10px;
+            color: #20121f;
             font-size: 1.53em;
             font-family: "Coda", sans-serif;
             font-weight: bold;
@@ -64,43 +60,286 @@
         .footer {
             margin: 2em auto;
             height: 3.70em;
-            background: #16a085;
+            background: #36173b;
             text-align: center;
             border-radius: 0 0 .3em .3em;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background 0.1s;
         }
 
         button {
             color: white;
             font-family: "Coda", sans-serif;
             text-align: center;
-            font-size: 20px;
             background: none;
+            font-size: 20px;
             outline: none;
             border: 0;
         }
 
+        button a{
+            text-decoration: none;
+            font-size: 24px;
+            color: azure;
+        }
+
         .footer:hover {
-            background: #1abc9c;
+            background: #5e3179;
         }
     </style>
 </head>
 
-<h1 class="title"> WELCOME BACK</h1>
-<h2 class="title">My profile</h2>
-<div class="user-profile">
-    <img id="avatar" src="/images/avatars/<%= locals.userLogged.SRC_Image%>">
-    <div id="fullname"> <%= locals.userLogged.Name %> </div>
-    <div id="username">
-        <%= locals.userLogged.Username %>
-    </div>
-    <div class="description">
-        <div>Email: <span id="email"><%= locals.userLogged.Email %></span></div>
-        <div>Gender: <span id="city"><%= locals.userLogged.Gender %></span></div>
-    </div>
-    <div class="footer">
-        <button id="btn"><a href="/">Home Page</a></button>
-</div>
+
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head'); %>
+
+    <head>
+        <style>
+            .modal-window {
+                position: fixed;
+                background-color: rgba(100, 97, 97, 0.25);
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                visibility: hidden;
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s;
+            }
+
+            .modal-window:target {
+                visibility: visible;
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .modal-window>div {
+                width: 500px;
+                position: absolute;
+                top: 50%;
+                left: 52%;
+                transform: translate(-50%, -50%);
+                padding: 2em;
+                color: #fff;
+                background: #252636;
+            }
+
+            .modal-window header {
+                font-weight: bold;
+            }
+
+            .modal-window h1 {
+                font-size: 150%;
+                margin: 0 0 15px;
+            }
+
+            .modal-close {
+                color: #aaa;
+                line-height: 50px;
+                font-size: 80%;
+                position: absolute;
+                right: 0;
+                text-align: center;
+                top: 0;
+                width: 70px;
+                text-decoration: none;
+            }
+
+            .modal-close:hover {
+                color: black;
+            }
+
+            .modal-window>div {
+                border-radius: 1rem;
+            }
+
+            .modal-window div:not(:last-of-type) {
+                margin-bottom: 15px;
+            }
+
+            .btn {
+                background-color: white;
+                padding: 1em 1.5em;
+                border-radius: 1rem;
+                text-decoration: none;
+            }
+
+            #postarea {
+                border-style: none;
+                border-color: Transparent;
+                overflow: auto;
+                padding: 5px;
+                color: #fff;
+                background: #252636;
+
+                border: none;
+                overflow: auto;
+                outline: none;
+
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+            }
+
+            #opciones {
+                padding: 5px;
+                color: #fff;
+                background: #252636;
+                border-style: none;
+                border-color: Transparent;
+            }
+
+            #sharebutton {
+                color: white;
+                background: rgb(29, 24, 31);
+                font-weight: 900;
+                font-size: 12px;
+                border-radius: 30px;
+                width: 80px;
+                height: 40px;
+                margin-left: 350px;
+            }
+
+            #sharebutton:hover {
+                background: rgb(81, 60, 82);
+            }
+        </style>
+    </head>
+
+    <body>
+        <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
+            <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
+            <div class="
+          sidebar-header
+          d-flex
+          justify-content-center
+          align-items-center
+          px-3
+          py-4
+        ">
+                <img class="rounded-pill img-fluid" width="65" src="/images/music.png" alt="" />
+                <div class="ms-2">
+                    <h5 class="fs-6 mb-0">
+                        <a class="text-decoration-none" href="#">WELCOME</a>
+                    </h5>
+                    <p class="mt-1 mb-0">Start sharing!</p>
+                </div>
+            </div>
+
+            <div class="search position-relative text-center px-4 py-3 mt-2">
+                <input type="text" class="form-control w-100 border-0 bg-transparent" style="color: #fff"
+                    placeholder="Search here" />
+                <i class="fa fa-search position-absolute d-block fs-6"></i>
+            </div>
+
+            <ul class="categories list-unstyled">
+                <li>
+                    <i class="fa fa-users" aria-hidden="true"></i><a href="#"> Our Users </a>
+                </li>
+                <li>
+                    <i class="fa fa-music" aria-hidden="true"></i><a href="#"> Music News </a>
+                </li>
+                <li>
+                    <i class="fas fa-crown" aria-hidden="true"></i><a href="#"> Taylor Swift </a>
+                </li>
+                <li><i class="fas fa-quote-right"></i><a href="#"> Music Quotes</a></li>
+                <li><i class="fab fa-youtube"></i><a href="/youtubeTop"> Top Music Videos </a></li>
+                <li>
+                    <i class="fas fa-heart-broken"></i><a href="#"> Heartbreak Songs </a>
+                </li>
+                <li><i class="fas fa-chart-line"></i><a href="#"> Charts Songs </a></li>
+                <li>
+                    <i class="fas fa-globe-americas"></i><a href="#"> By Location </a>
+                </li>
+                <% if(locals.isLogged) { %>
+                    <li>
+                        <i class="fas fa-edit"></i><a href="#open-modal"> Create a Post </a>
+                    </li>
+                    <%}%>
+            </ul>
+        </aside>
+
+        <section id="wrapper">
+            <nav class="navbar navbar-expand-md">
+                <div class="container-fluid mx-2">
+                    <div class="navbar-header">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <i class="uil-bars text-white"></i>
+                        </button>
+                        <a class="navbar-brand" href="#">Share<span class="main-color"> Your Music!</span></a>
+                    </div>
+                    <% if(locals.isLogged) { %>
+                        <div class="dropdown" style="right: 0; border-bottom: 3px solid #ffc107">
+                            <button class="dropbtn">
+                                <img height="30" width="30" src="/images/avatars/<%= locals.userLogged.SRC_Image %>" />
+                                Hola, <%= locals.userLogged.Name %>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="/user/profile">
+                                    <img src="/images/enter.png" />My profile</a>
+                                <a href="/user/logout">
+                                    <img src="/images/sign-up.png" /> Log out</a>
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="dropdown" style="right: 0; border-bottom: 3px solid #ffc107">
+                                <button class="dropbtn">
+                                    <img style="border-radius: 50%" id="imagen" height="30" width="30"
+                                        src="/images/avatars/default.png" />
+                                    My account
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="/user/profile"> <img width="16" height="16" src="/images/enter.png" /> Log
+                                        In</a>
+                                    <a href="/user/logout">
+                                        <img width="16" height="16" src="/images/sign-up.png" /> Sign Up</a>
+                                </div>
+                            </div>
+                            <% } %>
+                </div>
+            </nav>
+
+            <br><br><br>
+            <h1 class="title"> WELCOME BACK</h1>
+            <h2 class="title">My profile</h2>
+            <div class="user-profile">
+
+                <img id="avatar" src="/images/avatars/<%= locals.userLogged.SRC_Image%>">
+                
+                <div id="fullname">
+                    <%= locals.userLogged.Name + ' ' + locals.userLogged.Surnames %>
+                </div>
+                <div id="username">
+                    <%= locals.userLogged.Username %>
+                </div>
+                <div class="description">
+                    <div>Email: <span id="email">
+                            <%= locals.userLogged.Email %>
+                        </span></div>
+                    <div>Gender: <span id="city">
+                            <%= locals.userLogged.Gender %>
+                        </span></div>
+                    <div>Gender: <span id="city">
+                        <%= locals.userLogged.Born_Date %>
+                    </span></div>
+                </div>
+                <div class="footer">
+                    <button id="btn"><a href="/">Home Page</a></button>
+                </div>
+
+        </section>
+
+        <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+        <script src="/public/js/home.js"></script>
+        <script src="https://use.fontawesome.com/96171fdafb.js"></script>
+        <script src="https://kit.fontawesome.com/cf85f829dd.js" crossorigin="anonymous"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </body>
+
+</html>

@@ -146,9 +146,11 @@
       </div>
 
       <div class="search position-relative text-center px-4 py-3 mt-2">
-        <input type="text" class="form-control w-100 border-0 bg-transparent" style="color: #fff"
-          placeholder="Search here" />
-        <i class="fa fa-search position-absolute d-block fs-6"></i>
+        <form action="/youtubeTop/search" method="get">
+          <input type="text" id="search" name="q" class="form-control w-100 border-0 bg-transparent" style="color: #fff" placeholder="Video searcher" />
+          <i class="fa fa-search position-absolute d-block fs-6"></i>
+          <input type="submit" hidden style="border:0; padding:0; font-size:0">
+        </form>
       </div>
 
       <ul class="categories list-unstyled">
@@ -290,15 +292,16 @@
                 <div class="col-md-12">
                   <div class="box">
                     <!-- <h4>Admins:</h4> -->
-                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4">
+                    <div style="background-color: rgb(49, 51, 72);" class="admin d-flex align-items-center rounded-2 p-3 mb-4">
                       <div class="img">
-                        <img class="img-fluid rounded-pill" width="75" height="75" src="/images/Team/josue.png"
+                        <img class="img-fluid rounded-pill" width="75" height="75" src="/images/avatars/default.png"
                           alt="admin" />
                       </div>
                       <div class="ms-3">
-                        <h3 class="fs-5 mb-1"> @<%= Posts[i].Username %> </h3>
-                        <p class="mb-0"> <%= Posts[i].Text %> </p>
-                        <img id="imagenLike" width="16" height="16" src="/images/like.png">
+                        <h3 style="font-size: 16px;"class="mb-1"> @<%= Posts[i].Username %> </h3>
+                        <p style="color: rgb(196, 196, 214);"><img height="16" width="16" src="/images/pin.png" alt="Location"> <%= Posts[i].Location %> </p>
+                        <p style="color: #fff; font-weight: 20;" class="mb-0"> <%= Posts[i].Text %> </p> <br>
+                        <p style="color: #fff;"><img id="imagenLike" width="16" height="16" src="/images/like.png"> 0 <%= Posts[i].Likes %> </p> 
                       </div>
                     </div>
                   </div>

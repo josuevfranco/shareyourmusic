@@ -25,4 +25,4 @@ app.use(session({
 app.use(userLoggedMiddleware);
 app.use('/', mainRoutes);
 app.use('/user', userRoutes);
-app.use('/youtubeTop', services)
+app.use('/youtubeTop', services);

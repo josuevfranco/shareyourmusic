@@ -322,183 +322,18 @@
 
 			<section class="charts mt-4">
 
+                <p style="text-align: center; font-size: 24px; color: #fff;">Most popular results for your search</p>
+
+				<!--RESULT VIDEOS-->
+                <% for(let i = 0; i < 5 ; i++) { %>
 				<div class="movie_card" id="bright">
 					<div class="info_section" style="padding-bottom: 40px;">
-						<div class="movie_header">
-							<h1>
-								<%= videos.items[0].snippet.title %>
-							</h1>
-							<h4>2021 Top Music</h4>
-							<span class="minutes">Number 1</span>
-						</div>
-						<div class="movie_desc">
-						</div>
-						<div class="movie_social">
-							<ul>
-								<li> <a style="font-size: 36px;" href="#">
-										<button id="botonPlay"><label for="chk">
-												<ion-icon style="color: blue;" name="play-outline"></ion-icon>
-											</label></button>
-									</a> </li>
-							</ul>
-						</div>
-					</div>
-					<div style="background: url('<%= videos.items[0].snippet.thumbnails.standard.url %>') ;"
-						class="blur_back bright_back"></div>
-				</div>
-
-				<!--FIRST VIDEO-->
-				<input type="checkbox" id="chk" hidden>
-				<div id="ocultar" class="movie_card" id="bright">
-					<div class="info_section" style="padding-bottom: 40px;">
 						<iframe width="100%" height="100%"
-							src="https://www.youtube.com/embed/<%= videos.items[0].snippet.resourceId.videoId %>">
+							src="https://www.youtube.com/embed/<%= videos.items[i].id.videoId%>">
 						</iframe>
 					</div>
 				</div>
-
-				<div class="movie_card" id="bright">
-					<div class="info_section" style="padding-bottom: 40px;">
-						<div class="movie_header">
-							<h1>
-								<%= videos.items[1].snippet.title %>
-							</h1>
-							<h4>2021 Top Music</h4>
-							<span class="minutes">Number 2</span>
-						</div>
-						<div class="movie_desc">
-						</div>
-						<div class="movie_social">
-							<ul>
-								<li> <a style="font-size: 36px;" href="#">
-										<button id="botonPlay"><label for="chk2">
-												<ion-icon style="color: blue;" name="play-outline"></ion-icon>
-											</label></button>
-									</a> </li>
-							</ul>
-						</div>
-					</div>
-					<div style="background: url('<%= videos.items[1].snippet.thumbnails.high.url %>') ;"
-						class="blur_back bright_back"></div>
-				</div>
-
-				<!--SECOND VIDEO-->
-				<input type="checkbox" id="chk2" hidden>
-				<div id="ocultar2" class="movie_card" id="bright">
-					<div class="info_section" style="padding-bottom: 40px;">
-						<iframe width="100%" height="100%"
-							src="https://www.youtube.com/embed/<%= videos.items[1].snippet.resourceId.videoId %>">
-						</iframe>
-					</div>
-				</div>
-
-
-				<div class="movie_card" id="bright">
-					<div class="info_section" style="padding-bottom: 40px;">
-						<div class="movie_header">
-							<h1>
-								<%= videos.items[2].snippet.title %>
-							</h1>
-							<h4>2021 Top Music</h4>
-							<span class="minutes">Number 3</span>
-						</div>
-						<div class="movie_desc">
-						</div>
-						<div class="movie_social">
-							<ul>
-								<li> <a style="font-size: 36px;" href="#">
-										<button id="botonPlay"><label for="chk3">
-												<ion-icon style="color: blue;" name="play-outline"></ion-icon>
-											</label></button>
-									</a> </li>
-							</ul>
-						</div>
-					</div>
-					<div style="background: url('<%= videos.items[2].snippet.thumbnails.standard.url %>') ;"
-						class="blur_back bright_back"></div>
-				</div>
-
-				<!--THIRD VIDEO-->
-				<input type="checkbox" id="chk3" hidden>
-				<div id="ocultar3" class="movie_card" id="bright">
-					<div class="info_section" style="padding-bottom: 40px;">
-						<iframe width="100%" height="100%"
-							src="https://www.youtube.com/embed/<%= videos.items[2].snippet.resourceId.videoId %>">
-						</iframe>
-					</div>
-				</div>
-
-
-				<div class="movie_card" id="bright">
-					<div class="info_section" style="padding-bottom: 40px;">
-						<div class="movie_header">
-							<h1>
-								<%= videos.items[3].snippet.title %>
-							</h1>
-							<h4>2021 Top Music</h4>
-							<span class="minutes">Number 4</span>
-						</div>
-						<div class="movie_desc">
-						</div>
-						<div class="movie_social">
-							<ul>
-								<li> <a style="font-size: 36px;" href="#">
-										<button id="botonPlay"><label for="chk4">
-												<ion-icon style="color: blue;" name="play-outline"></ion-icon>
-											</label></button>
-									</a> </li>
-							</ul>
-						</div>
-					</div>
-					<div style="background: url('<%= videos.items[3].snippet.thumbnails.standard.url %>') ;"
-						class="blur_back bright_back"></div>
-				</div>
-
-				<!--FORTH VIDEO-->
-				<input type="checkbox" id="chk4" hidden>
-				<div id="ocultar4" class="movie_card" id="bright">
-					<div class="info_section" style="padding-bottom: 40px;">
-						<iframe width="100%" height="100%"
-							src="https://www.youtube.com/embed/<%= videos.items[3].snippet.resourceId.videoId %>">
-						</iframe>
-					</div>
-				</div>
-
-				<div class="movie_card" id="bright">
-					<div class="info_section" style="padding-bottom: 40px;">
-						<div class="movie_header">
-							<h1>
-								<%= videos.items[4].snippet.title %>
-							</h1>
-							<h4>2021 Top Music</h4>
-							<span class="minutes">Number 5</span>
-						</div>
-						<div class="movie_desc">
-						</div>
-						<div class="movie_social">
-							<ul>
-								<li> <a style="font-size: 36px;" href="#">
-										<button id="botonPlay"><label for="chk5">
-												<ion-icon style="color: blue;" name="play-outline"></ion-icon>
-											</label></button>
-									</a> </li>
-							</ul>
-						</div>
-					</div>
-					<div style="background: url('<%= videos.items[4].snippet.thumbnails.high.url %>') ;"
-						class="blur_back bright_back"></div>
-				</div>
-
-				<!--FITH VIDEO-->
-				<input type="checkbox" id="chk5" hidden>
-				<div id="ocultar5" class="movie_card" id="bright">
-					<div class="info_section" style="padding-bottom: 40px;">
-						<iframe width="100%" height="100%"
-							src="https://www.youtube.com/embed/<%= videos.items[4].snippet.resourceId.videoId %>">
-						</iframe>
-					</div>
-				</div>
-
+                <% }%>
 			</section>
 
 

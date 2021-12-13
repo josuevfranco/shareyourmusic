@@ -59,7 +59,7 @@ module.exports = {
 			return res.send(err)
 		}
 		
-		return res.send('Ok, las validaciones se pasaron y no tienes errores');
+		return res.redirect('/');
 
 	}
 }

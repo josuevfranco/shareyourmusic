@@ -158,7 +158,7 @@
           <i class="fa fa-users" aria-hidden="true"></i><a href="#"> Our Users </a>
         </li>
         <li>
-          <i class="fa fa-music" aria-hidden="true"></i><a href="/musicNews"> Music News </a>
+          <i class="fa fa-music" aria-hidden="true"></i><a href="#"> Music News </a>
         </li>
         <li>
           <i class="fas fa-crown" aria-hidden="true"></i><a href="#"> Taylor Swift </a>
@@ -221,71 +221,16 @@
       </nav>
 
       <div class="p-4">
-        <div class="welcome">
-          <div class="content rounded-3 p-3">
-            <h1 class="fs-3">Welcome to ShareYourMusic!</h1>
-            <p class="mb-0">
-              It is a social network where you can find and share everything
-              related to music. Sing up and have fun!
-            </p>
-          </div>
-        </div>
-        <br />
 
         <div class="welcome">
           <div class="content rounded-3 p-3">
             <h1 class="fs-3">
-              Featured Posts <img src="/images/musical-notes.png" />
+              Music News Category Posts <img src="/images/musical-notes.png" />
             </h1>
           </div>
         </div>
 
-        <br />
-        <div id="open-modal" class="modal-window">
-          <div>
-            <a href="#" title="Close" class="modal-close">Close</a>
-            <hr>
-            <h1>
-              <ion-icon name="create-outline"></ion-icon> New Post
-            </h1>
-            <form action="/createPost" method="POST" class="productForm" >
-              <div>
-                <textarea name="Text" id="postarea" cols="50" placeholder="What's happenig?" rows="5"></textarea>
-              </div>
-              <select id="opciones" style="font-size: 14px;" name="opciones">
-                <option class="control">Choose a category</option>
-                <% let opciones=['Music News', 'Music Quotes' , 'Heartbreak Songs' , 'Taylor Swift']; %>
-                  <% for (const oneOption of opciones) { %>
-                    <option value="<%= oneOption %>">
-                      <%= oneOption %>
-                    </option>
-                    <% } %>
-              </select>
-              <hr>
-              <div><button type="submit" id="sharebutton">Share!</button></div>
-            </form>
-          </div>
-        </div>
-        <% if(locals.isLogged) { %>
-          <!-- publication -->
-          <div class="tweetBox">
-            <form>
-              <div class="tweetbox__input">
-                <div onclick="loadPage('profile')" class="tweetbox__input__profileimage">
-                  <img src="/images/avatars/<%= locals.userLogged.SRC_Image %>" alt="Profile" />
-                </div>
-                <div class="inputt">
-                  <a href="#open-modal">
-                    <ion-icon name="create-outline"></ion-icon> Create a Post
-                  </a>
-                </div>
-              </div>
-            </form>
-          </div>
-          <!-- ends -->
-          <%}%>
 
-  
           <% for(let i = 0; i < Posts.length; i++) { %>
             <section class="admins mt-4">
               <div class="row">

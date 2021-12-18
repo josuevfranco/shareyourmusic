@@ -155,22 +155,21 @@
 
       <ul class="categories list-unstyled">
         <li>
-          <i class="fa fa-users" aria-hidden="true"></i><a href="#"> Our Users </a>
+          <i class="fa fa-users" aria-hidden="true"></i><a href="/ourUser"> Our Users </a>
         </li>
         <li>
           <i class="fa fa-music" aria-hidden="true"></i><a href="/musicNews"> Music News </a>
         </li>
         <li>
-          <i class="fas fa-crown" aria-hidden="true"></i><a href="#"> Taylor Swift </a>
+          <i class="fas fa-crown" aria-hidden="true"></i><a href="/taylorSwift"> Taylor Swift </a>
         </li>
-        <li><i class="fas fa-quote-right"></i><a href="#"> Music Quotes</a></li>
+        <li><i class="fas fa-quote-right"></i><a href="/musicQuotes"> Music Quotes</a></li>
         <li><i class="fab fa-youtube"></i><a href="/youtubeTop"> Top Music Videos </a></li>
         <li>
-          <i class="fas fa-heart-broken"></i><a href="#"> Heartbreak Songs </a>
+          <i class="fas fa-heart-broken"></i><a href="/heartBreakSongs"> Heartbreak Songs </a>
         </li>
-        <li><i class="fas fa-chart-line"></i><a href="#"> Charts Songs </a></li>
         <li>
-          <i class="fas fa-globe-americas"></i><a href="#"> By Location </a>
+          <i class="fas fa-globe-americas"></i><a href="/category"> By Location </a>
         </li>
         <% if(locals.isLogged) { %>
           <li>
@@ -212,7 +211,7 @@
                 </button>
                 <div class="dropdown-content">
                   <a href="/user/profile"> <img width="16" height="16" src="/images/enter.png" /> Log In</a>
-                  <a href="/user/logout">
+                  <a href="/user/register">
                     <img  width="16" height="16" src="/images/sign-up.png" /> Sign Up</a>
                 </div>
               </div>
@@ -294,7 +293,7 @@
                     <!-- <h4>Admins:</h4> -->
                     <div style="background-color: rgb(49, 51, 72);" class="admin d-flex align-items-center rounded-2 p-3 mb-4">
                       <div class="img">
-                        <img class="img-fluid rounded-pill" width="75" height="75" src="/images/avatars/default.png "
+                        <img class="img-fluid rounded-pill" width="75" height="75" src="/images/avatars/user.png "
                           alt="admin" />
                       </div>
                       <div class="ms-3">
@@ -370,14 +369,14 @@
                 <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <div class="box bg-primary p-3">
                     <i class="uil-eye"></i>
-                    <h3>5,154</h3>
+                    <h3> <%= Posts.length %> </h3>
                     <p class="lead">Total of Posts</p>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <div class="box bg-danger p-3">
                     <i class="uil-user"></i>
-                    <h3>245</h3>
+                    <h3> <%= User.length %> </h3>
                     <p class="lead">User registered</p>
                   </div>
                 </div>

@@ -21,4 +21,10 @@ router.get('/musicQuotes', mainController.musicQuotes);
 //Heart Break Songs
 router.get('/heartBreakSongs', mainController.heartBreakSongs);
 
+//Group by Category
+router.get('/category', mainController.category);
+
+//Get all of the users
+router.get('/ourUser', mainController.ourUser);
+
 module.exports = router;

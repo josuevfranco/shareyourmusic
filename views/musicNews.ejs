@@ -158,20 +158,20 @@
           <i class="fa fa-users" aria-hidden="true"></i><a href="#"> Our Users </a>
         </li>
         <li>
-          <i class="fa fa-music" aria-hidden="true"></i><a href="#"> Music News </a>
+          <i class="fa fa-music" aria-hidden="true"></i><a href="/musicNews"> Music News </a>
         </li>
         <li>
-          <i class="fas fa-crown" aria-hidden="true"></i><a href="#"> Taylor Swift </a>
+          <i class="fas fa-crown" aria-hidden="true"></i><a href="/taylorSwift"> Taylor Swift </a>
         </li>
-        <li><i class="fas fa-quote-right"></i><a href="#"> Music Quotes</a></li>
+        <li><i class="fas fa-quote-right"></i><a href="/musicQuotes"> Music Quotes</a></li>
         <li><i class="fab fa-youtube"></i><a href="/youtubeTop"> Top Music Videos </a></li>
         <li>
-          <i class="fas fa-heart-broken"></i><a href="#"> Heartbreak Songs </a>
+          <i class="fas fa-heart-broken"></i><a href="/heartBreakSongs"> Heartbreak Songs </a>
         </li>
-        <li><i class="fas fa-chart-line"></i><a href="#"> Charts Songs </a></li>
         <li>
-          <i class="fas fa-globe-americas"></i><a href="#"> By Location </a>
+          <i class="fas fa-globe-americas"></i><a href="/category"> By Location </a>
         </li>
+
         <% if(locals.isLogged) { %>
           <li>
             <i class="fas fa-edit"></i><a href="#open-modal"> Create a Post </a>
@@ -225,7 +225,7 @@
         <div class="welcome">
           <div class="content rounded-3 p-3">
             <h1 class="fs-3">
-              Music News Category Posts <img src="/images/musical-notes.png" />
+              <%= titulo %> <img src="/images/musical-notes.png" />
             </h1>
           </div>
         </div>

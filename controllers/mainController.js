@@ -73,34 +73,51 @@ module.exports = {
 		return res.redirect('/');
 
 	},
-	heartBreakSongs: (req, res) => {
+	heartBreakSongs: async (req, res) => {
 		
-		db.Post.findAll({
-		where: {
-			Id_Category: '3'
+		try{
+			await db.Post.findAll({
+				where: {
+					Id_Category: '3'
+				}
+				}).then(Posts=>{
+					return res.render('musicNews', { 'Posts': Posts, 'titulo': "Heart Break Posts" });
+				});
+		}catch(err){
+			return res.send(err)
 		}
-		}).then(resultados=>{
-			return res.render('index', { 'Posts': Posts });
-		})
 
 	},
-	musicQuotes: (req, res) => {
-		db.Post.findAll({
-			where: {
-				Id_Category: '2'
-			}
-			}).then(resultados=>{
-				return res.render('index', { 'Posts': Posts });
-			})
+	musicQuotes: async (req, res) => {
+
+		try{
+			await db.Post.findAll({
+				where: {
+					Id_Category: '2'
+				}
+				}).then(Posts=>{
+					return res.render('musicNews', { 'Posts': Posts, 'titulo': "Music Quotes Posts" });
+				});
+		}catch(err){
+			return res.send(err)
+		}
+
+
 	},
-	taylorSwift: (req, res) => {
-		db.Post.findAll({
-			where: {
-				Id_Category: '4'
-			}
-			}).then(resultados=>{
-				return res.render('index', { 'Posts': Posts });
-			})
+	taylorSwift: async (req, res) => {
+
+		try{
+			await db.Post.findAll({
+				where: {
+					Id_Category: '4'
+				}
+				}).then(Posts=>{
+					return res.render('musicNews', { 'Posts': Posts, 'titulo': "Taylor Swift Posts" });
+				});
+		}catch(err){
+			return res.send(err)
+		}
+
 	},
 	musicNews: async (req, res) => {
 			try{
@@ -109,10 +126,45 @@ module.exports = {
 						Id_Category: '1'
 					}
 					}).then(Posts=>{
-						return res.render('musicNews', { 'Posts': Posts });
+						return res.render('musicNews', { 'Posts': Posts, 'titulo': "Music News Posts" });
 					});
 			}catch(err){
 				return res.send(err)
 			}
-	}
+	},
+	category: async (req, res) => {
+		try{
+			await db.Post.findAll({
+				group: ['Location']
+				}).then(Posts=>{
+					return res.render('musicNews', { 'Posts': Posts, 'titulo': "Featured Posts Grouped By Location" });
+				});
+		}catch(err){
+			return res.send(err)
+		}		
+	},
+	ourUser: (req, res) => {
+		let Posts = [];
+		let User2 = [];
+		let profile = [];
+
+		db.Post.findAll()
+            .then(function(Post) {
+               Posts = Post
+        })
+
+		db.Post.findAll({
+			include: [{
+			  model: db.User
+			}]
+		  }).then(posts => {
+			profile = posts
+		});
+
+	
+		db.User.findAll()
+            .then(function(User) {
+                return res.render('ourUser', { 'Posts': Posts, 'User' : User, 'profile' : profile });
+        })		
+	},
 }

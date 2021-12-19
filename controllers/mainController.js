@@ -39,7 +39,6 @@ module.exports = {
 		today = mm + '/' + dd + '/' + yyyy;
 
 		let payload = await fetch('https://api.ipregistry.co/?key=fxszopqcaz22b19p').then(response => response.json())
-		//console.log(payload)
 		let location = payload.location.country.name + ', ' + payload.location.city;
 		console.log(location)
 			
